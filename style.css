@@ -169,7 +169,7 @@ footer {
   max-width: var(--max-width);
   margin: 0 auto;
   display: flex;
-  justify-content: space-between; /* 👈 puts banner on right */
+  justify-content: space-between; /* <— forces left & right separation */
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 20px;
