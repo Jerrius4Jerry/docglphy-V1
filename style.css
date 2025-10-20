@@ -29,8 +29,8 @@ header {
 
 header img {
   width: 90%;
-  height: 150px; /* 👈 adjust height here (try 200–300px) */
-  border-radius: 8px;
+  height: 95px; /* 👈 adjust height here (try 200–300px) */
+  border-radius: 10px;
   display: block;
   object-fit: cover; /* 👈 ensures it crops proportionally, not squish */
 }
