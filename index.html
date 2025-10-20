@@ -1,67 +1,277 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Docglyph – Smart Tools for the Digital Era</title>
-    <meta name="description" content="Explore Docglyph — a minimal collection of smart online tools: PDF utilities, QR generator, password creator, and more.">
-    <link href="style.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="Brand Logo (1).png">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Docglyph — Tools & Blog</title>
+  <meta name="description" content="Docglyph — PDF tools, QR generator, Password creator, Passphrase / Key creator. All client-side." />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+
+  <style>
+    :root{
+      --bg:#fdfbf7;
+      --card:#f3e8ff;
+      --muted:#64748b;
+      --accent:#6a5acd;
+      --footer:#000;
+      --max-width:1100px;
+    }
+    *{box-sizing:border-box}
+    body{font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:#1f2937;margin:0;background:var(--bg)}
+    header{max-width:var(--max-width);margin:18px auto;padding:0 18px}
+    header img{width:100%;border-radius:10px;display:block;object-fit:cover}
+
+    .page{max-width:var(--max-width);margin:18px auto;display:grid;grid-template-columns:160px 1fr 160px;gap:18px;padding:0 18px}
+    .ad-space{background:#fff;border-radius:10px;border:1px dashed rgba(0,0,0,0.06);min-height:600px;display:flex;align-items:center;justify-content:center;color:var(--muted);padding:12px;position:sticky;top:90px}
+    .ad-space.small{min-height:200px}
+    .center{background:transparent;padding:8px}
+    .tools-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-bottom:22px}
+    .card{background:var(--card);border-radius:14px;padding:20px;text-align:center;box-shadow:0 6px 18px rgba(15,23,42,0.04);transition:transform .18s,box-shadow .18s}
+    .card:hover{transform:translateY(-6px);box-shadow:0 10px 30px rgba(15,23,42,0.08)}
+    .card h3{margin:0 0 8px 0}
+    .card p{color:var(--muted);margin:0 0 12px 0}
+    .btn{background:var(--accent);color:#fff;border:0;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:600}
+    .btn.ghost{background:transparent;color:var(--accent);border:1px solid rgba(106,90,205,0.12)}
+    .blog{background:#fff;border-radius:12px;padding:18px;box-shadow:0 6px 18px rgba(15,23,42,0.04)}
+
+    .promo{margin-top:18px}
+    .promo img{width:100%;display:block;border-radius:10px}
+
+    footer{background:var(--footer);color:#fff;padding:20px 18px;margin-top:30px}
+    .footer-inner{max-width:var(--max-width);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+    .footer-left{display:flex;align-items:center;gap:12px}
+    .footer-left img{height:44px}
+    .footer-links a{color:#d6cbff;text-decoration:none;margin:0 8px}
+    .ads-footer{width:100%;height:90px;background:#0b0b0b;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#999;margin-bottom:14px;border:1px dashed #222}
+
+    /* Modals */
+    .modal{display:none;position:fixed;inset:0;background:rgba(3,7,18,0.6);align-items:center;justify-content:center;z-index:60;padding:20px}
+    .modal.open{display:flex}
+    .modal-card{background:#fff;border-radius:14px;padding:18px;max-width:720px;width:100%;box-shadow:0 10px 40px rgba(2,6,23,0.4);position:relative}
+    .modal-close{position:absolute;right:12px;top:10px;cursor:pointer;font-size:20px;color:#666}
+    .modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    input[type=text],input[type=file],select,textarea, input[type=range]{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(15,23,42,0.06);background:#fff;color:#111}
+    .muted{color:var(--muted);font-size:13px}
+
+    .range-row{display:flex;gap:8px;align-items:center}
+    .range-row label{min-width:80px;font-size:13px;color:var(--muted)}
+
+    @media(max-width:980px){
+      .page{grid-template-columns:1fr;padding:0 14px}
+      .ad-space{display:none}
+      .tools-grid{grid-template-columns:1fr}
+      .modal-grid{grid-template-columns:1fr}
+    }
+  </style>
 </head>
+
 <body>
-    <header class="header">
-        <img src="assets/banner.png" class="banner" alt="Docglyph Banner">
-    </header>
+  <header>
+    <img src="images/docglyph-header.png" alt="Docglyph banner">
+  </header>
 
-    <main class="main">
-        <aside class="sidebar left">
-            <h2>Tools</h2>
-            <button onclick="showSection('pdf')">PDF Tools</button>
-            <button onclick="showSection('qr')">QR Generator</button>
-            <button onclick="showSection('password')">Password Creator</button>
-        </aside>
+  <div class="page">
+    <div class="ad-space" aria-hidden="true">AdSense (Left)</div>
 
-        <section id="content" class="content">
-            <div id="pdf" class="tool-section">
-                <h3>PDF Tools</h3>
-                <p>Coming soon: Merge, Split, and Compress PDFs directly in your browser.</p>
-            </div>
-
-            <div id="qr" class="tool-section hidden">
-                <h3>QR Generator</h3>
-                <input type="text" id="qrInput" placeholder="Enter text or URL">
-                <button onclick="generateQR()">Generate QR</button>
-                <div id="qrcode"></div>
-            </div>
-
-            <div id="password" class="tool-section hidden">
-                <h3>Password Creator</h3>
-                <button onclick="generatePassword()">Generate Password</button>
-                <p id="passwordOutput"></p>
-            </div>
-        </section>
-
-        <aside class="sidebar right">
-            <h2>Blog</h2>
-            <p><strong>Digital Tools & AI Utility Insights</strong></p>
-            <p>Explore articles about how AI, automation, and smart utilities shape the digital workflow.</p>
-        </aside>
-    </main>
-
-    <section class="promo">
-        <img src="assets/.aieth banner.png" alt="AIETH Banner">
-    </section>
-
-    <footer class="footer">
-        <img src="assets/Brand Logo (1).png" alt="Docglyph Logo">
-        <div class="footer-links">
-            <a href="#">Blog</a> | <a href="#">Resume</a> | <a href="#">Contact</a>
+    <div class="center">
+      <section class="tools-grid" aria-label="tools">
+        <div class="card">
+          <h3>PDF Tools</h3>
+          <p class="muted">Merge, split, compress PDFs — all in the browser.</p>
+          <button class="btn" onclick="openModal('pdfModal')">Open</button>
         </div>
-        <p>© 2025 Docglyph.com</p>
-    </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
-    <script src="script.js"></script>
+        <div class="card">
+          <h3>QR Generator</h3>
+          <p class="muted">Create QR codes for any URL or text.</p>
+          <button class="btn" onclick="openModal('qrModal')">Open</button>
+        </div>
+
+        <div class="card">
+          <h3>Password Creator</h3>
+          <p class="muted">Strong random passwords (crypto-backed).</p>
+          <button class="btn" onclick="openModal('pwdModal')">Open</button>
+        </div>
+
+        <div class="card">
+          <h3>Passphrase / Key Creator</h3>
+          <p class="muted">Human-friendly passphrases (diceware style).</p>
+          <button class="btn" onclick="openModal('phraseModal')">Open</button>
+        </div>
+      </section>
+
+      <section class="blog" aria-label="blog">
+        <h2 style="margin-top:0">Digital Tools & AI Utility Insights</h2>
+        <p class="muted">Short posts and case studies on digital identity, CBDCs, and design patterns for trust. Example post: <strong>Designing Trust: UX Patterns for Digital Identity</strong>.</p>
+      </section>
+
+      <div class="promo">
+        <img src="images/aieth-footer.png" alt="promo banner">
+      </div>
+    </div>
+
+    <div class="ad-space" aria-hidden="true">AdSense (Right)</div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-left">
+        <img src="images/docglyph-logo.png" alt="logo">
+        <div>
+          <div class="muted">© 2025 Docglyph</div>
+          <div class="footer-links"><a href="#">Blog</a><a href="#">Resume</a><a href="#">Contact</a></div>
+        </div>
+      </div>
+
+      <div style="flex:1;max-width:560px;margin-left:18px">
+        <div class="ads-footer" aria-hidden="true">Footer AdSense</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- PDF Modal -->
+  <div id="pdfModal" class="modal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="pdfTitle">
+      <div class="modal-close" onclick="closeModal('pdfModal')">&times;</div>
+      <h3 id="pdfTitle">PDF Tools</h3>
+      <div style="margin-top:10px" class="muted">Processing happens in your browser; files do not leave your machine.</div>
+
+      <div style="margin-top:14px" class="modal-grid">
+        <div>
+          <h4>Merge PDFs</h4>
+          <input id="mergeFiles" type="file" accept="application/pdf" multiple>
+          <div style="margin-top:8px;display:flex;gap:8px">
+            <button class="btn" onclick="mergePDFs()">Merge & Download</button>
+          </div>
+          <p class="muted" style="margin-top:8px">Select multiple PDFs (in the order you want).</p>
+        </div>
+
+        <div>
+          <h4>Split / Compress</h4>
+          <label class="muted">Choose file</label>
+          <input id="singlePdfFile" type="file" accept="application/pdf">
+
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <button class="btn" onclick="splitPDF()">Split (Download Pages)</button>
+            <button class="btn" onclick="compressPDF()">Compress & Download</button>
+          </div>
+
+          <!-- Compression controls -->
+          <div style="margin-top:12px">
+            <div class="range-row"><label>Render scale</label><input id="compressScale" type="range" min="0.5" max="1.5" step="0.05" value="0.85"></div>
+            <div class="range-row" style="margin-top:8px"><label>JPEG quality</label><input id="jpegQuality" type="range" min="0.4" max="0.95" step="0.05" value="0.7"></div>
+            <div style="margin-top:8px" class="muted">Lower scale/quality → smaller file but lower visual fidelity. Adjust and test per document.</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="pdfOutput" style="margin-top:12px"></div>
+    </div>
+  </div>
+
+  <!-- QR Modal -->
+  <div id="qrModal" class="modal" aria-hidden="true">
+    <div class="modal-card" role="dialog">
+      <div class="modal-close" onclick="closeModal('qrModal')">&times;</div>
+      <h3>QR Generator</h3>
+      <div style="margin-top:10px" class="muted">Enter text or URL and generate a QR code.</div>
+      <input id="qrText" type="text" placeholder="https://docglyph.com" style="margin-top:12px">
+      <div style="margin-top:10px;display:flex;gap:8px;align-items:center">
+        <button class="btn" onclick="generateQRModal()">Generate</button>
+        <button class="btn ghost" onclick="downloadQR()">Download PNG</button>
+      </div>
+      <div id="qrCanvas" style="margin-top:14px"></div>
+    </div>
+  </div>
+
+  <!-- Password Modal -->
+  <div id="pwdModal" class="modal" aria-hidden="true">
+    <div class="modal-card" role="dialog">
+      <div class="modal-close" onclick="closeModal('pwdModal')">&times;</div>
+      <h3>Password Creator</h3>
+      <div style="margin-top:10px" class="muted">Crypto-random strong passwords. Adjust length below.</div>
+      <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
+        <label class="muted">Length</label>
+        <input id="pwdLength" type="number" min="6" max="64" value="16" style="width:80px">
+        <label style="margin-left:6px"><input id="useSymbols" type="checkbox" checked> Symbols</label>
+      </div>
+      <div style="margin-top:12px;display:flex;gap:8px">
+        <button class="btn" onclick="generatePasswordModal()">Generate</button>
+        <button class="btn ghost" onclick="copyPassword()">Copy</button>
+      </div>
+      <p id="pwdShow" style="margin-top:12px;font-weight:600"></p>
+    </div>
+  </div>
+
+  <!-- Passphrase Modal -->
+  <div id="phraseModal" class="modal" aria-hidden="true">
+    <div class="modal-card" role="dialog">
+      <div class="modal-close" onclick="closeModal('phraseModal')">&times;</div>
+      <h3>Passphrase / Key Creator</h3>
+      <div style="margin-top:8px" class="muted">Choose number of words and whether to add numbers / symbols.</div>
+      <div style="display:flex;gap:8px;margin-top:10px;align-items:center">
+        <label class="muted">Words</label>
+        <select id="phraseWords">
+          <option value="3">3</option>
+          <option value="4" selected>4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+        </select>
+        <label style="margin-left:6px"><input id="phraseNumber" type="checkbox"> Add number</label>
+        <label><input id="phraseSymbol" type="checkbox"> Add symbol</label>
+      </div>
+
+      <div style="margin-top:12px;display:flex;gap:8px">
+        <button class="btn" onclick="generatePassphrase()">Generate</button>
+        <button class="btn ghost" onclick="copyPassphrase()">Copy</button>
+      </div>
+      <p id="phraseShow" style="margin-top:12px;font-weight:700;letter-spacing:0.6px"></p>
+    </div>
+  </div>
+
+  <script>
+  // Modals
+  function openModal(id){ const el=document.getElementById(id); el.classList.add('open'); el.setAttribute('aria-hidden','false'); }
+  function closeModal(id){ const el=document.getElementById(id); el.classList.remove('open'); el.setAttribute('aria-hidden','true'); }
+  window.addEventListener('click', e => { document.querySelectorAll('.modal.open').forEach(m => { if(e.target===m) closeModal(m.id); }); });
+  window.addEventListener('keydown', e=>{ if(e.key==='Escape') document.querySelectorAll('.modal.open').forEach(m=>m.classList.remove('open')) });
+
+  // QR
+  let qrObj=null;
+  function generateQRModal(){ const t=document.getElementById('qrText').value.trim(); const el=document.getElementById('qrCanvas'); el.innerHTML=''; if(!t) return alert('Enter text'); qrObj=new QRCode(el,{text:t,width:200,height:200}); }
+  function downloadQR(){ const img=document.querySelector('#qrCanvas img, #qrCanvas canvas'); if(!img) return alert('Generate QR first'); const src = img.tagName==='IMG'?img.src:img.toDataURL('image/png'); const a=document.createElement('a'); a.href=src; a.download='docglyph-qr.png'; a.click(); }
+
+  // Password
+  function generatePasswordModal(){ const len=parseInt(document.getElementById('pwdLength').value)||16; const useSym=document.getElementById('useSymbols').checked; let chars='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'; if(useSym) chars+='!@#$%^&*()-_=+[]{};:,.<>?'; const rand=new Uint32Array(len); crypto.getRandomValues(rand); let out=''; for(let i=0;i<len;i++) out += chars[rand[i] % chars.length]; document.getElementById('pwdShow').textContent=out; }
+  function copyPassword(){ const t=document.getElementById('pwdShow').textContent; if(!t) return alert('Generate first'); navigator.clipboard.writeText(t).then(()=>alert('Copied')); }
+
+  // Lazy-load Diceware (passphrase)
+  let WORDS=[]; let dicewareLoaded=false;
+  async function loadDicewareList(){ if(dicewareLoaded) return; try{ const resp=await fetch('assets/diceware.txt'); const txt=await resp.text(); WORDS = txt.split(/\r?\n/).map(l=>l.trim()).filter(Boolean); dicewareLoaded=true; console.log('Loaded',WORDS.length,'words'); }catch(err){ alert('Failed to load diceware list: '+err.message); } }
+  async function generatePassphrase(){ if(!dicewareLoaded) await loadDicewareList(); if(!WORDS.length) return alert('Wordlist not loaded'); const wcount=parseInt(document.getElementById('phraseWords').value)||4; const addNum=document.getElementById('phraseNumber').checked; const addSym=document.getElementById('phraseSymbol').checked; const rand=new Uint32Array(wcount); crypto.getRandomValues(rand); const out=[]; for(let i=0;i<wcount;i++) out.push(WORDS[rand[i]%WORDS.length]); if(addNum) out.push(String(Math.floor(Math.random()*900)+100)); if(addSym) out.push(['!','#','$','%','&','*'][Math.floor(Math.random()*6)]); const phrase=out.join('-'); document.getElementById('phraseShow').textContent=phrase; }
+  function copyPassphrase(){ const t=document.getElementById('phraseShow').textContent; if(!t) return alert('Generate first'); navigator.clipboard.writeText(t).then(()=>alert('Copied')); }
+
+  // PDF tools libs
+  const PDFLib = window.PDFLib;
+  const pdfjsLib = window['pdfjs-dist/build/pdf'];
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+
+  function downloadBytes(bytes, filename){ const blob=new Blob([bytes],{type:'application/pdf'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=filename; a.click(); setTimeout(()=>URL.revokeObjectURL(url),2000); }
+
+  async function mergePDFs(){ const input=document.getElementById('mergeFiles'); if(!input.files.length) return alert('Select PDFs to merge'); try{ const merged=await PDFLib.PDFDocument.create(); for(const f of input.files){ const arr=await f.arrayBuffer(); const donor=await PDFLib.PDFDocument.load(arr); const pages=await merged.copyPages(donor,donor.getPageIndices()); pages.forEach(p=>merged.addPage(p)); } const out=await merged.save(); downloadBytes(out,'docglyph-merged.pdf'); }catch(e){ console.error(e); alert('Merge failed: '+e.message); } }
+
+  async function splitPDF(){ const input=document.getElementById('singlePdfFile'); if(!input.files.length) return alert('Select a PDF to split'); const file=input.files[0]; try{ const data=await file.arrayBuffer(); const doc=await pdfjsLib.getDocument({data}).promise; const outDiv=document.getElementById('pdfOutput'); outDiv.innerHTML=''; for(let i=1;i<=doc.numPages;i++){ const page=await doc.getPage(i); const viewport=page.getViewport({scale:1.5}); const canvas=document.createElement('canvas'); canvas.width=Math.floor(viewport.width); canvas.height=Math.floor(viewport.height); const ctx=canvas.getContext('2d'); await page.render({canvasContext:ctx,viewport}).promise; const pdfDoc=await PDFLib.PDFDocument.create(); const pngBytes=await canvasToPngBytes(canvas); const img=await pdfDoc.embedPng(pngBytes); const p=pdfDoc.addPage([img.width,img.height]); p.drawImage(img,{x:0,y:0,width:img.width,height:img.height}); const bytes=await pdfDoc.save(); const link=makeDownloadLink(bytes,`page-${i}.pdf`); outDiv.appendChild(link); } }catch(e){ console.error(e); alert('Split failed: '+e.message); } }
+
+  async function compressPDF(){ const input=document.getElementById('singlePdfFile'); if(!input.files.length) return alert('Select a PDF to compress'); const scale=parseFloat(document.getElementById('compressScale').value)||0.85; const jpegQuality=parseFloat(document.getElementById('jpegQuality').value)||0.7; const file=input.files[0]; try{ const data=await file.arrayBuffer(); const doc=await pdfjsLib.getDocument({data}).promise; const outPdf=await PDFLib.PDFDocument.create(); for(let i=1;i<=doc.numPages;i++){ const page=await doc.getPage(i); const viewport=page.getViewport({scale}); const canvas=document.createElement('canvas'); canvas.width=Math.floor(viewport.width); canvas.height=Math.floor(viewport.height); const ctx=canvas.getContext('2d'); await page.render({canvasContext:ctx,viewport}).promise; const jpgBytes=await canvasToJpegBytes(canvas,jpegQuality); const img=await outPdf.embedJpg(jpgBytes); const p=outPdf.addPage([img.width,img.height]); p.drawImage(img,{x:0,y:0,width:img.width,height:img.height}); } const outBytes=await outPdf.save(); downloadBytes(outBytes,file.name.replace(/\.pdf$/i,'')+'-compressed.pdf'); }catch(e){ console.error(e); alert('Compress failed: '+e.message); } }
+
+  function canvasToPngBytes(canvas){ return new Promise(resolve => canvas.toBlob(blob => blob.arrayBuffer().then(buf => resolve(new Uint8Array(buf))), 'image/png')); }
+  function canvasToJpegBytes(canvas,q=0.7){ return new Promise(resolve => canvas.toBlob(blob => blob.arrayBuffer().then(buf => resolve(new Uint8Array(buf))), 'image/jpeg', q)); }
+  function makeDownloadLink(bytes, filename){ const blob=new Blob([bytes],{type:'application/pdf'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=filename; a.textContent='Download '+filename; a.style.display='inline-block'; a.style.margin='6px 8px'; a.className='btn ghost'; return a; }
+  </script>
 </body>
 </html>
