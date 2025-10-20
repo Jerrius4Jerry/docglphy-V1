@@ -277,6 +277,89 @@
       .ad-space { display: none; }
       .tools-grid, .blog-grid { grid-template-columns: 1fr; }
     }
+    /* =======================
+   VISIBILITY ENHANCEMENTS
+======================= */
+
+/* --- Header --- */
+.top-nav {
+  padding: 16px 50px;
+}
+
+.nav-logo {
+  height: 52px;   /* Increased from ~36px */
+}
+
+.nav-links a, 
+.dropdown-btn {
+  font-size: 17px;   /* Larger readable size */
+}
+
+.dropdown-content a {
+  font-size: 16px;
+}
+
+/* --- Tools dropdown spacing --- */
+.dropdown-content {
+  min-width: 200px;
+  padding: 6px 0;
+}
+
+/* --- AdSense banner fix --- */
+.ads-footer,
+.ad-space {
+  background: #f9fafc;   /* Light neutral background */
+  color: #6b7280;
+  border: 1px dashed rgba(0, 0, 0, 0.1);
+}
+
+/* --- Footer --- */
+footer {
+  background: #111;   /* Softer dark, not pure black */
+  padding: 40px 24px;
+}
+
+.footer-inner {
+  align-items: center;
+  gap: 30px;
+}
+
+.footer-left img {
+  height: 60px;   /* Make logo visible */
+}
+
+.footer-links a {
+  font-size: 16px;
+}
+
+.footer-links a:hover {
+  color: #9f9cff;
+}
+
+/* --- Social icons --- */
+.footer-social a img {
+  height: 28px;  /* Bigger icons */
+  width: 28px;
+  margin-left: 10px;
+  filter: brightness(1.1);
+  transition: transform 0.3s ease;
+}
+
+.footer-social a img:hover {
+  transform: scale(1.15);
+}
+
+/* --- Footer Promo Banner --- */
+.promo-footer img {
+  width: 320px;  /* Wider promo banner */
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.promo-footer img:hover {
+  transform: scale(1.03);
+}
+
   </style>
 </head>
 
