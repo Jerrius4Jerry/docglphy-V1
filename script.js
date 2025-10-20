@@ -56,12 +56,18 @@ function openModal(tool) {
         <div id="qrcode" style="margin-top:20px; display:flex; justify-content:center;"></div>
       `;
       document.getElementById("generateQR").onclick = () => {
-        const text = document.getElementById("qrText").value.trim();
-        const qrDiv = document.getElementById("qrcode");
-        qrDiv.innerHTML = "";
-        if (!text) return alert("Enter text or URL!");
-        new QRCode(qrDiv, { text, width: 150, height: 150 });
-      };
+  const text = document.getElementById("qrText").value.trim();
+  const qrDiv = document.getElementById("qrcode");
+  qrDiv.innerHTML = "";
+
+  if (!text) {
+    alert("Enter text or URL!");
+    return;
+  }
+
+  new QRCode(qrDiv, { text, width: 150, height: 150 });
+};
+
       break;
 
     case "pwdModal":
