@@ -31,15 +31,108 @@
     }
 
     header {
-      max-width: var(--max-width);
-      margin: 18px auto;
-      padding: 0 18px;
+      background-color: #fff;
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    header img {
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .logo img {
       width: 100%;
-      border-radius: 10px;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .brand h1 {
+      font-size: 1.5rem;
+      color: #6a5acd;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .brand p {
+      font-size: 0.9rem;
+      color: #666;
+      margin: 0;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      position: relative;
+    }
+
+    .nav-btn {
+      background: none;
+      border: none;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      color: #333;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      border-radius: 6px;
+      padding: 0.6rem 1rem;
+      transition: background-color 0.3s;
+    }
+
+    .nav-btn:hover {
+      background-color: #f3e8ff;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 2.8rem;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      min-width: 200px;
+      overflow: hidden;
+      z-index: 10;
+    }
+
+    .dropdown-content a {
       display: block;
-      object-fit: cover;
+      padding: 10px 14px;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f3e8ff;
+      color: #6a5acd;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .dropdown-content hr {
+      border: none;
+      border-top: 1px solid #eee;
+      margin: 6px 0;
     }
 
     h2.section-title {
@@ -188,39 +281,39 @@
 </head>
 
 <body>
-  <nav class="top-nav">
-  <div class="nav-left">
-    <img src="./images/docglyph-logo.png.png" alt="Docglyph Logo" class="nav-logo" />
-    <div class="nav-links">
-      <a href="#">Compress</a>
-      <a href="#">Merge</a>
-      <a href="#">Edit</a>
-      <a href="#">Sign</a>
-      <a href="#">AI PDF</a>
+  <!-- Header -->
+  <header>
+    <div class="logo-section">
+      <div class="logo">
+        <img src="./images/docglyph-logo.png.png" alt="Docglyph Logo">
+      </div>
+      <div class="brand">
+        <h1>Docglyph</h1>
+        <p>Smart Tools for the Digital Era</p>
+      </div>
+    </div>
+
+    <nav>
       <div class="dropdown">
-        <button class="dropdown-btn">More Tools ▾</button>
+        <button class="nav-btn">🧰 Tools ▾</button>
         <div class="dropdown-content">
+          <a href="#">PDF Tools</a>
           <a href="#">QR Generator</a>
           <a href="#">Password Creator</a>
-          <a href="#">Passphrase Creator</a>
-          <hr />
+          <a href="#">Passphrase / Key Creator</a>
+          <a href="#">Color Extractor</a>
+          <a href="#">Scanner</a>
+          <hr>
           <a href="subscription.html">Subscription Reminder</a>
         </div>
       </div>
-    </div>
-  </div>
-</nav>
-
-  <!-- Header -->
-  <header>
-    <img src="./images/docglyph-banner.png.png" alt="Docglyph banner">
+    </nav>
   </header>
 
   <div class="page">
     <div class="ad-space" aria-hidden="true">AdSense (Left)</div>
 
     <div class="center">
-      <!-- Tools Section -->
       <h2 class="section-title">Smart Tools</h2>
       <hr class="divider" />
 
@@ -250,7 +343,6 @@
         </div>
       </section>
 
-      <!-- Blog Section -->
       <h2 class="section-title">Digital Tools & AI Utility Insights</h2>
       <hr class="divider" />
 
@@ -280,14 +372,12 @@
         </div>
       </section>
 
-      <!-- Footer AdSense Placeholder -->
       <div class="ads-footer">AdSense (Footer)</div>
     </div>
 
     <div class="ad-space" aria-hidden="true">AdSense (Right)</div>
   </div>
 
-  <!-- Footer -->
   <footer>
     <div class="footer-inner">
       <div class="footer-left">
@@ -302,7 +392,8 @@
 
       <div class="promo-footer">
         <a href="https://freename.com/home/aieth-banner.png.png" target="_blank">
-        <img src="./images/aieth-banner.png.png" alt="AIETH Promo Banner">
+          <img src="./images/aieth-banner.png.png" alt="AIETH Promo Banner">
+        </a>
       </div>
     </div>
   </footer>
