@@ -114,3 +114,10 @@ function openModal(tool) {
 function closeModal() {
   document.getElementById("toolModal").style.display = "none";
 }
+// ==== FADE IN TOOL & BLOG CARDS ====
+document.addEventListener("DOMContentLoaded", () => {
+  const allCards = document.querySelectorAll('.card, .blog-card');
+  allCards.forEach((card, index) => {
+    setTimeout(() => card.classList.add('visible'), 150 * index);
+  });
+});
