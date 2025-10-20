@@ -157,28 +157,30 @@ hr.divider {
 }
 
 /* ---------- Footer ---------- */
+/* ---------- Footer Layout (Aligned Left + Right) ---------- */
 footer {
   background: var(--footer);
   color: #fff;
   padding: 40px 18px;
-  margin-top: 40px;
+  margin-top: 30px;
 }
 
 .footer-inner {
   max-width: var(--max-width);
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* 👈 puts banner on right */
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 20px;
 }
 
+/* Left section - stacked vertically */
 .footer-left {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 12px;
+  gap: 14px;
 }
 
 .footer-links {
@@ -205,21 +207,20 @@ footer {
 }
 
 .social-icons svg {
-  width: 24px;
-  height: 24px;
-  fill: #d6cbff;
-  transition: transform 0.2s ease, fill 0.2s ease;
+  transition: transform 0.2s ease, opacity 0.2s ease;
   cursor: pointer;
 }
 
 .social-icons svg:hover {
-  transform: scale(1.2);
+  transform: scale(1.1);
+  opacity: 0.8;
   fill: #a998ff;
 }
 
-/* Promo Banner */
+/* Right side banner */
 .promo-footer {
-  width: 260px;
+  flex-shrink: 0;
+  width: 280px; /* 👈 bigger but compact */
   border-radius: 8px;
   overflow: hidden;
 }
@@ -230,11 +231,11 @@ footer {
   border-radius: 8px;
 }
 
-/* Copyright */
+/* Copyright line */
 .footer-bottom {
   width: 100%;
   text-align: right;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: #aaa;
   margin-top: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.15);
