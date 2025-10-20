@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docglyph – Smart Tools for the Digital Era</title>
+    <meta name="description" content="Explore Docglyph — a minimal collection of smart online tools: PDF utilities, QR generator, password creator, and more.">
+    <link href="style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="Brand Logo (1).png">
+</head>
+<body>
+    <header class="header">
+        <img src="Docglphy.com banner.png" alt="Docglyph Banner" class="header-banner">
+    </header>
+
+    <main class="main">
+        <aside class="sidebar left">
+            <h2>Tools</h2>
+            <button onclick="showSection('pdf')">PDF Tools</button>
+            <button onclick="showSection('qr')">QR Generator</button>
+            <button onclick="showSection('password')">Password Creator</button>
+        </aside>
+
+        <section id="content" class="content">
+            <div id="pdf" class="tool-section">
+                <h3>PDF Tools</h3>
+                <p>Coming soon: Merge, Split, and Compress PDFs directly in your browser.</p>
+            </div>
+
+            <div id="qr" class="tool-section hidden">
+                <h3>QR Generator</h3>
+                <input type="text" id="qrInput" placeholder="Enter text or URL">
+                <button onclick="generateQR()">Generate QR</button>
+                <div id="qrcode"></div>
+            </div>
+
+            <div id="password" class="tool-section hidden">
+                <h3>Password Creator</h3>
+                <button onclick="generatePassword()">Generate Password</button>
+                <p id="passwordOutput"></p>
+            </div>
+        </section>
+
+        <aside class="sidebar right">
+            <h2>Blog</h2>
+            <p><strong>Digital Tools & AI Utility Insights</strong></p>
+            <p>Explore articles about how AI, automation, and smart utilities shape the digital workflow.</p>
+        </aside>
+    </main>
+
+    <section class="promo">
+        <img src=".aieth banner.png" alt="AIETH Banner" class="promo-banner">
+    </section>
+
+    <footer class="footer">
+        <img src="Brand Logo (1).png" alt="Docglyph Logo" class="footer-logo">
+        <div class="footer-links">
+            <a href="#">Blog</a> | <a href="#">Resume</a> | <a href="#">Contact</a>
+        </div>
+        <p>© 2025 Docglyph.com</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
