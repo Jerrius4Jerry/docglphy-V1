@@ -86,34 +86,34 @@ function openModal(tool) {
     };
   };
 
-  // --- SPLIT PDF ---
-  document.getElementById("splitPDFBtn").onclick = () => {
-    toolContainer.innerHTML = `
-      <input type="file" id="splitInput" accept="application/pdf" />
-      <button id="doSplit" class="btn" style="margin-top:10px;">Split into Pages</button>
-    `;
+  /// --- SPLIT PDF ---
+document.getElementById("splitPDFBtn").onclick = () => {
+  toolContainer.innerHTML = `
+    <input type="file" id="splitInput" accept="application/pdf" />
+    <button id="doSplit" class="btn" style="margin-top:10px;">Split into Pages</button>
+  `;
 
-    document.getElementById("doSplit").onclick = async () => {
-      const file = document.getElementById("splitInput").files[0];
-      if (!file) return alert("Select a PDF to split.");
+  document.getElementById("doSplit").onclick = async () => {
+    const file = document.getElementById("splitInput").files[0];
+    if (!file) return alert("Select a PDF to split.");
 
-      const bytes = await file.arrayBuffer();
-      const pdf = await PDFLib.PDFDocument.load(bytes);
+    const bytes = await file.arrayBuffer();
+    const pdf = await PDFLib.PDFDocument.load(bytes);
 
-      for (let i = 0; i < pdf.getPageCount(); i++) {
-        const newPdf = await PDFLib.PDFDocument.create();
-        const [page] = await newPdf.copyPages(pdf, [i]);
-        newPdf.addPage(page);
-        const newBytes = await newPdf.save();
+    for (let i = 0; i < pdf.getPageCount(); i++) {
+      const newPdf = await PDFLib.PDFDocument.create();
+      const [page] = await newPdf.copyPages(pdf, [i]);
+      newPdf.addPage(page);
+      const newBytes = await newPdf.save();
 
-        const blob = new Blob([newBytes], { type: "application/pdf" });
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download = \`page-\${i + 1}.pdf\`;
-        link.click();
-      }
-    };
+      const blob = new Blob([newBytes], { type: "application/pdf" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = `page-${i + 1}.pdf`;  // ✅ Correct syntax
+      link.click();
+    }
   };
+};
 
   // --- IMAGE → PDF ---
   document.getElementById("imgToPDFBtn").onclick = () => {
