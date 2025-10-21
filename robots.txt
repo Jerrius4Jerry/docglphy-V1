@@ -1,0 +1,5 @@
+# robots.txt for Docglyph
+User-agent: *
+Allow: /
+
+Sitemap: https://docglphy.com/sitemap.xml
