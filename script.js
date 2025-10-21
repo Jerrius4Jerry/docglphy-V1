@@ -41,13 +41,115 @@ function openModal(tool) {
 
   switch (tool) {
     case "pdfModal":
-      title.textContent = "📄 PDF Tools";
-      body.innerHTML = `
-        <p>Merge or Split PDF files in your browser (demo only).</p>
-        <input type="file" id="pdfInput" accept="application/pdf" multiple />
-        <p style="font-size:0.9rem; color:#666;">(PDF-Lib demo — processing client-side)</p>
-      `;
-      break;
+  title.textContent = "📄 PDF Tools";
+  body.innerHTML = `
+    <p style="margin-bottom:10px;">Perform PDF operations directly in your browser (client-side only).</p>
+    
+    <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
+      <button id="mergePDFsBtn" class="btn">Merge PDFs</button>
+      <button id="splitPDFBtn" class="btn">Split PDF</button>
+      <button id="imgToPDFBtn" class="btn">Image → PDF</button>
+    </div>
+
+    <div id="pdfToolContainer" style="margin-top:18px; text-align:center;"></div>
+    <p style="font-size:0.9rem; color:#666; margin-top:16px;">(Powered by PDF-Lib — all client-side)</p>
+  `;
+
+  const toolContainer = document.getElementById("pdfToolContainer");
+
+  // --- MERGE PDFs ---
+  document.getElementById("mergePDFsBtn").onclick = () => {
+    toolContainer.innerHTML = `
+      <input type="file" id="mergeInput" accept="application/pdf" multiple />
+      <button id="doMerge" class="btn" style="margin-top:10px;">Merge</button>
+    `;
+
+    document.getElementById("doMerge").onclick = async () => {
+      const files = document.getElementById("mergeInput").files;
+      if (files.length < 2) return alert("Select at least two PDF files.");
+
+      const mergedPdf = await PDFLib.PDFDocument.create();
+
+      for (const file of files) {
+        const bytes = await file.arrayBuffer();
+        const pdf = await PDFLib.PDFDocument.load(bytes);
+        const pages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+        pages.forEach((p) => mergedPdf.addPage(p));
+      }
+
+      const mergedBytes = await mergedPdf.save();
+      const blob = new Blob([mergedBytes], { type: "application/pdf" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "merged.pdf";
+      link.click();
+    };
+  };
+
+  // --- SPLIT PDF ---
+  document.getElementById("splitPDFBtn").onclick = () => {
+    toolContainer.innerHTML = `
+      <input type="file" id="splitInput" accept="application/pdf" />
+      <button id="doSplit" class="btn" style="margin-top:10px;">Split into Pages</button>
+    `;
+
+    document.getElementById("doSplit").onclick = async () => {
+      const file = document.getElementById("splitInput").files[0];
+      if (!file) return alert("Select a PDF to split.");
+
+      const bytes = await file.arrayBuffer();
+      const pdf = await PDFLib.PDFDocument.load(bytes);
+
+      for (let i = 0; i < pdf.getPageCount(); i++) {
+        const newPdf = await PDFLib.PDFDocument.create();
+        const [page] = await newPdf.copyPages(pdf, [i]);
+        newPdf.addPage(page);
+        const newBytes = await newPdf.save();
+
+        const blob = new Blob([newBytes], { type: "application/pdf" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = \`page-\${i + 1}.pdf\`;
+        link.click();
+      }
+    };
+  };
+
+  // --- IMAGE → PDF ---
+  document.getElementById("imgToPDFBtn").onclick = () => {
+    toolContainer.innerHTML = `
+      <input type="file" id="imgInput" accept="image/*" multiple />
+      <button id="doImgToPDF" class="btn" style="margin-top:10px;">Convert</button>
+    `;
+
+    document.getElementById("doImgToPDF").onclick = async () => {
+      const files = document.getElementById("imgInput").files;
+      if (!files.length) return alert("Select one or more images.");
+
+      const pdfDoc = await PDFLib.PDFDocument.create();
+
+      for (const file of files) {
+        const imgBytes = await file.arrayBuffer();
+        let img;
+        if (file.type.includes("png")) {
+          img = await pdfDoc.embedPng(imgBytes);
+        } else {
+          img = await pdfDoc.embedJpg(imgBytes);
+        }
+        const page = pdfDoc.addPage([img.width, img.height]);
+        page.drawImage(img, { x: 0, y: 0, width: img.width, height: img.height });
+      }
+
+      const pdfBytes = await pdfDoc.save();
+      const blob = new Blob([pdfBytes], { type: "application/pdf" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "images_to_pdf.pdf";
+      link.click();
+    };
+  };
+  break;
+
 
     case "qrModal":
       title.textContent = "🔳 QR Code Generator";
