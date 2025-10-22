@@ -759,6 +759,22 @@
             <p>Create human-readable cryptographic keys and memorable passphrases with one click.</p>
             <button class="btn" onclick="openModal('phraseModal')">Open Tool</button>
           </div>
+
+          <!-- 🎨 Color Extractor Tool -->
+  <div class="card" id="color-extractor">
+    <div class="card-icon">🎨</div>
+    <h3>Color Extractor</h3>
+    <p>Extract color palettes from uploaded images for design inspiration and analysis.</p>
+    <button class="btn" onclick="openToolModal('colorModal')">Open Tool</button>
+  </div>
+
+  <!-- 🖼️ Image Compressor Tool -->
+  <div class="card" id="image-compressor">
+    <div class="card-icon">🖼️</div>
+    <h3>Image Compressor</h3>
+    <p>Reduce image size directly in your browser — no server upload, privacy guaranteed.</p>
+    <button class="btn" onclick="openToolModal('compressModal')">Open Tool</button>
+  </div>
         </section>
 
         <!-- Mid-content Ad Container -->
@@ -1071,5 +1087,13 @@
       });
     });
   </script>
+  <!-- 🔧 Tool Modal Container -->
+<div id="toolModal" class="modal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeToolModal()">×</button>
+    <h2 id="modalTitle"></h2>
+    <div id="modalBody"></div>
+  </div>
+</div>
 </body>
 </html>
