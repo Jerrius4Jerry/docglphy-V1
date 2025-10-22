@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>docglphy — Smart Tools for the Digital Era</title>
-  <meta name="description" content="Docglyph offers browser-based PDF tools, QR generators, password creators, and AI utilities — built for privacy and speed." />
-  <meta name="keywords" content="Docglyph, PDF tools, QR generator, password creator, passphrase generator, AI utilities, digital identity, CBDC, smart tools" />
+  <title>Docglyph — Smart Tools for the Digital Era</title>
+  <meta name="description" content="Docglyph provides smart browser-based tools for PDFs, QR generation, password creation, and digital utilities — built with privacy and AI insights in mind." />
+  <meta name="keywords" content="Docglyph, PDF tools, QR generator, password creator, AI utilities, digital identity, CBDC, smart tools" />
   <meta name="author" content="Docglyph Team" />
-  
+
   <!-- External stylesheet -->
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
@@ -20,8 +20,7 @@
 
   <!-- ✅ Google AdSense -->
   <meta name="google-adsense-account" content="ca-pub-6206040467137091">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6206040467137091"
-     crossorigin="anonymous"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6206040467137091" crossorigin="anonymous"></script>
 
   <style>
     :root {
@@ -30,15 +29,16 @@
       --muted: #64748b;
       --accent: #6a5acd;
       --footer: #000;
-      --max-width: 1100px;
+      --max-width: 1200px;
     }
 
     * { box-sizing: border-box; }
     body {
-      font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      font-family: 'Poppins', system-ui, sans-serif;
       color: #1f2937;
       margin: 0;
       background: var(--bg);
+      line-height: 1.6;
     }
 
     header {
@@ -56,158 +56,66 @@
       gap: 1rem;
     }
 
-    .logo {
+    .logo img {
       width: 50px;
       height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .logo img {
-      width: 100%;
-      height: 100%;
       object-fit: contain;
     }
 
     .brand h1 {
-      font-size: 1.5rem;
-      color: #6a5acd;
-      font-weight: 700;
+      font-size: 1.6rem;
+      color: var(--accent);
       margin: 0;
     }
+    .brand p { color: #666; margin: 0; }
 
-    .brand p {
-      font-size: 0.9rem;
-      color: #666;
-      margin: 0;
-    }
-
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      position: relative;
-    }
-
-    .nav-btn {
-      background: none;
-      border: none;
-      font-size: 1rem;
-      font-weight: 500;
-      cursor: pointer;
-      color: #333;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      border-radius: 6px;
-      padding: 0.6rem 1rem;
-      transition: background-color 0.3s;
-    }
-
-    .nav-btn:hover {
-      background-color: #f3e8ff;
-    }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      right: 0;
-      top: 2.8rem;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-      min-width: 200px;
-      overflow: hidden;
-      z-index: 10;
-    }
-
-    .dropdown-content a {
-      display: block;
-      padding: 10px 14px;
-      text-decoration: none;
-      color: #333;
-      font-weight: 500;
-    }
-
-    .dropdown-content a:hover {
-      background-color: #f3e8ff;
-      color: #6a5acd;
-    }
-
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
-    .dropdown-content hr {
-      border: none;
-      border-top: 1px solid #eee;
-      margin: 6px 0;
-    }
-
-    h2.section-title {
+    /* Intro section */
+    .intro {
       text-align: center;
-      margin: 24px 0 8px 0;
-      font-size: 1.5rem;
-      font-weight: 600;
+      max-width: 850px;
+      margin: 40px auto 20px auto;
+      padding: 0 16px;
+    }
+    .intro h2 {
+      color: var(--accent);
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    .intro p {
+      color: var(--muted);
+      font-size: 1rem;
     }
 
-    hr.divider {
-      border: none;
-      height: 2px;
-      width: 80px;
-      background: var(--accent);
-      margin: 0 auto 24px auto;
-      border-radius: 2px;
-    }
-
+    /* Layout */
     .page {
       max-width: var(--max-width);
-      margin: 18px auto;
+      margin: 0 auto;
       display: grid;
-      grid-template-columns: 160px 1fr 160px;
-      gap: 18px;
+      grid-template-columns: 1fr;
       padding: 0 18px;
     }
 
-    .ad-space {
-      background: #fff;
-      border-radius: 10px;
-      border: 1px dashed rgba(0,0,0,0.06);
-      min-height: 600px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--muted);
-      padding: 12px;
-      position: sticky;
-      top: 90px;
-    }
-
-    .center { background: transparent; padding: 8px; }
-
     .tools-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
-      margin-bottom: 22px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      justify-content: center;
     }
 
     .card {
       background: var(--card);
-      border-radius: 14px;
-      padding: 20px;
+      border-radius: 16px;
+      padding: 24px;
       text-align: center;
-      box-shadow: 0 6px 18px rgba(15,23,42,0.04);
+      box-shadow: 0 6px 18px rgba(15,23,42,0.06);
       transition: transform .18s, box-shadow .18s;
     }
     .card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 10px 30px rgba(15,23,42,0.08);
+      box-shadow: 0 10px 30px rgba(15,23,42,0.1);
     }
-    .card h3 { margin: 0 0 8px 0; }
-    .card p { color: var(--muted); margin: 0 0 12px 0; }
+    .card h3 { margin-bottom: 10px; color: #333; }
+    .card p { color: var(--muted); font-size: 0.95rem; margin-bottom: 16px; }
     .btn {
       background: var(--accent);
       color: #fff;
@@ -218,12 +126,15 @@
       font-weight: 600;
     }
 
+    /* Blog section */
+    .blog-section {
+      margin-top: 50px;
+    }
     .blog-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
     }
-
     .blog-card {
       background: #fff;
       border-radius: 14px;
@@ -231,72 +142,41 @@
       text-align: left;
       box-shadow: 0 6px 18px rgba(15,23,42,0.04);
     }
-
-    .blog-card h3 { margin-top: 0; }
+    .blog-card h3 { margin-top: 0; color: var(--accent); }
     .blog-card p { color: var(--muted); }
-
-    .ads-footer {
-      width: 100%;
-      height: 90px;
-      background: #0b0b0b;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #999;
-      margin: 18px 0;
-      border: 1px dashed #222;
-    }
 
     footer {
       background: var(--footer);
       color: #fff;
       padding: 30px 18px;
-      margin-top: 30px;
+      margin-top: 40px;
     }
-
     .footer-inner {
       max-width: var(--max-width);
       margin: 0 auto;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .footer-left {
-      display: flex;
       align-items: center;
-      gap: 12px;
+      flex-wrap: wrap;
+      gap: 20px;
     }
-
     .footer-links a {
       color: #d6cbff;
       text-decoration: none;
       margin: 0 8px;
     }
 
-    .promo-footer img {
-      width: 100%;
-      display: block;
-      border-radius: 10px;
-    }
-
     @media(max-width:980px) {
-      .page { grid-template-columns: 1fr; padding: 0 14px; }
-      .ad-space { display: none; }
-      .tools-grid, .blog-grid { grid-template-columns: 1fr; }
+      .intro h2 { font-size: 1.6rem; }
     }
   </style>
 </head>
 
 <body>
+  <!-- Header -->
   <header>
     <div class="logo-section">
-      <div class="logo">
-        <img src="./images/docglyph-logo.png.png" alt="Docglyph Logo">
-      </div>
+      <img src="./images/docglyph-logo.png.png" alt="Docglyph Logo">
       <div class="brand">
         <h1>Docglyph</h1>
         <p>Smart Tools for the Digital Era</p>
@@ -311,8 +191,6 @@
           <a href="#">QR Generator</a>
           <a href="#">Password Creator</a>
           <a href="#">Passphrase / Key Creator</a>
-          <a href="#">Color Extractor</a>
-          <a href="#">Scanner</a>
           <hr>
           <a href="https://www.notion.so/docglphy-clarity/Subscription-Clarity-28e00453ee6c808a84abe6ace9c11583">Subscription Reminder</a>
         </div>
@@ -320,129 +198,84 @@
     </nav>
   </header>
 
-  <div class="page">
-    <div class="ad-space" id="ad-left">
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-6206040467137091"
-           data-ad-slot="1111111111"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-    </div>
+  <!-- ✅ SEO INTRO SECTION -->
+  <section class="intro">
+    <h2>Welcome to Docglyph</h2>
+    <p>
+      Docglyph is your digital workspace for privacy-first browser tools.
+      Whether you're merging PDFs, generating QR codes, or creating strong passwords and secure passphrases,
+      everything runs directly on your device — no uploads, no tracking.
+    </p>
+    <p>
+      Explore our AI and digital trust articles below to understand how technology, design, and identity intersect in the era of automation.
+    </p>
+  </section>
 
-    <div class="center">
-      <h2 class="section-title">Smart Tools</h2>
-      <hr class="divider" />
+  <main class="page">
+    <h2 class="section-title">Smart Tools</h2>
+    <hr class="divider" />
 
-      <section class="tools-grid" aria-label="tools">
-        <div class="card">
-          <h3>PDF Tools</h3>
-          <p>Merge, split, compress PDFs — all in the browser.</p>
-          <button class="btn" onclick="openModal('pdfModal')">Open</button>
-        </div>
+    <section class="tools-grid">
+      <div class="card">
+        <h3>PDF Tools</h3>
+        <p>Merge, split, or convert PDF files instantly — all within your browser.</p>
+        <button class="btn" onclick="openModal('pdfModal')">Open</button>
+      </div>
 
-        <div class="card">
-          <h3>QR Generator</h3>
-          <p>Create QR codes for any URL or text.</p>
-          <button class="btn" onclick="openModal('qrModal')">Open</button>
-        </div>
+      <div class="card">
+        <h3>QR Generator</h3>
+        <p>Create customized QR codes for links, text, or digital IDs.</p>
+        <button class="btn" onclick="openModal('qrModal')">Open</button>
+      </div>
 
-        <div class="card">
-          <h3>Password Creator</h3>
-          <p>Strong random passwords (crypto-backed).</p>
-          <button class="btn" onclick="openModal('pwdModal')">Open</button>
-        </div>
+      <div class="card">
+        <h3>Password Creator</h3>
+        <p>Generate strong, encrypted, and unique passwords instantly.</p>
+        <button class="btn" onclick="openModal('pwdModal')">Open</button>
+      </div>
 
-        <div class="card">
-          <h3>Passphrase / Key Creator</h3>
-          <p>Human-friendly passphrases (diceware style).</p>
-          <button class="btn" onclick="openModal('phraseModal')">Open</button>
-        </div>
-      </section>
+      <div class="card">
+        <h3>Passphrase / Key Creator</h3>
+        <p>Build human-friendly yet secure key phrases for better digital safety.</p>
+        <button class="btn" onclick="openModal('phraseModal')">Open</button>
+      </div>
+    </section>
 
+    <section class="blog-section">
       <h2 class="section-title">Digital Tools & AI Utility Insights</h2>
       <hr class="divider" />
-
-      <section class="blog-grid" aria-label="blog">
+      <div class="blog-grid">
         <div class="blog-card">
           <h3>Designing Trust</h3>
-          <p>UX patterns for digital identity and transparency in AI.</p>
-          <button class="btn">Read More</button>
+          <p>How AI and UX design foster digital identity and transparency. Learn how trust frameworks evolve in automated systems.</p>
         </div>
-
         <div class="blog-card">
           <h3>Smart Docs with AI</h3>
-          <p>Automating document workflows using intelligent tools.</p>
-          <button class="btn">Read More</button>
+          <p>AI is revolutionizing document workflows. Discover how automation simplifies contracts, audits, and verification.</p>
         </div>
-
         <div class="blog-card">
           <h3>CBDCs & Digital Trust</h3>
-          <p>Exploring design considerations for central bank digital currencies.</p>
-          <button class="btn">Read More</button>
+          <p>Explore how central bank digital currencies are shaping the next wave of fintech and identity assurance.</p>
         </div>
-
         <div class="blog-card">
           <h3>Identity UX Patterns</h3>
-          <p>How user experience shapes digital trust frameworks.</p>
-          <button class="btn">Read More</button>
+          <p>Learn how user experience design affects digital identity perception and authentication security.</p>
         </div>
-      </section>
-    </div>
-
-    <div class="ad-space" id="ad-right">
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-6206040467137091"
-           data-ad-slot="2222222222"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-    </div>
-  </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    <div class="ads-footer">
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-6206040467137091"
-           data-ad-slot="3333333333"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-    </div>
-
     <div class="footer-inner">
-      <div class="footer-left">
-        <div class="footer-links">
-          <a href="#">Blog</a>
-          <a href="#">About Us</a>
-          <a href="#">Contact Us</a>
-        </div>
-        <div class="social-icons">
-          <a href="https://www.instagram.com/jerriuscogitator/" target="_blank">📸</a>
-          <a href="https://www.youtube.com/channel/UCAXhW3Caz476ds2LQb191Fw" target="_blank">▶️</a>
-          <a href="https://jerriuscogitator.blogspot.com" target="_blank">📝</a>
-        </div>
+      <div class="footer-links">
+        <a href="#">Blog</a>
+        <a href="#">About Us</a>
+        <a href="#">Contact Us</a>
       </div>
-      <div class="promo-footer">
-        <a href="https://freename.com/home/aieth-banner.png.png" target="_blank">
-          <img src="./images/aieth-banner.png.png" alt="AIETH Promo Banner">
-        </a>
-      </div>
+      <div>© 2025 Docglyph</div>
     </div>
-
-    <div class="footer-bottom">© 2025 Docglyph</div>
   </footer>
 
-  <!-- Main JS -->
   <script src="script.js"></script>
-
-  <!-- AdSense loader -->
-  <script>
-    window.addEventListener("load", function() {
-      document.querySelectorAll(".adsbygoogle").forEach(ad => {
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      });
-    });
-  </script>
 </body>
 </html>
