@@ -4,19 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Docglyph — Smart Tools for the Digital Era</title>
-  <meta name="description" content="Docglyph provides smart browser-based tools for PDFs, QR generation, password creation, and digital utilities — built with privacy and AI insights in mind." />
+  <meta name="description" content="Docglyph offers browser-based tools for PDFs, QR codes, password creation, and digital utilities with privacy and AI insights." />
   <meta name="keywords" content="Docglyph, PDF tools, QR generator, password creator, AI utilities, digital identity, CBDC, smart tools" />
   <meta name="author" content="Docglyph Team" />
 
-  <!-- External stylesheet -->
-  <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="icon" href="./images/docglyph-logo.png.png" type="image/png">
-
-  <!-- Libraries -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-  <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
 
   <!-- ✅ Google AdSense -->
   <meta name="google-adsense-account" content="ca-pub-6206040467137091">
@@ -24,7 +17,7 @@
 
   <style>
     :root {
-      --bg: #fdfbf7;
+      --bg: #faf9ff;
       --card: #f3e8ff;
       --muted: #64748b;
       --accent: #6a5acd;
@@ -32,125 +25,203 @@
       --max-width: 1200px;
     }
 
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Poppins', system-ui, sans-serif;
-      color: #1f2937;
-      margin: 0;
+      font-family: 'Poppins', sans-serif;
       background: var(--bg);
+      color: #1f2937;
       line-height: 1.6;
     }
 
+    /* ==== Header ==== */
     header {
       background-color: #fff;
-      padding: 1rem 2rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 0.5rem 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-    }
-
-    .logo-section {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .logo img {
-      width: 50px;
-      height: 50px;
-      object-fit: contain;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     }
 
     .brand h1 {
-      font-size: 1.6rem;
       color: var(--accent);
-      margin: 0;
+      font-size: 1.3rem;
+      font-weight: 700;
     }
-    .brand p { color: #666; margin: 0; }
 
-    /* Intro section */
-    .intro {
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      position: relative;
+    }
+
+    .nav-btn {
+      background: none;
+      border: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      color: #333;
+      border-radius: 6px;
+      padding: 0.4rem 0.8rem;
+      transition: background 0.3s;
+    }
+
+    .nav-btn:hover {
+      background: #f3e8ff;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 2.4rem;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      overflow: hidden;
+      z-index: 10;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 10px 14px;
+      color: #333;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .dropdown-content a:hover {
+      background: #f3e8ff;
+      color: var(--accent);
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* ==== Hero Banner ==== */
+    .hero {
+      background: url('./images/banner-main.jpg') center/cover no-repeat;
+      height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-      max-width: 850px;
-      margin: 40px auto 20px auto;
-      padding: 0 16px;
+      color: #fff;
+      padding: 20px;
     }
-    .intro h2 {
-      color: var(--accent);
+    .hero h2 {
       font-size: 2rem;
-      margin-bottom: 10px;
+      font-weight: 700;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.4);
     }
-    .intro p {
-      color: var(--muted);
+    .hero p {
       font-size: 1rem;
+      margin-top: 10px;
+      max-width: 600px;
     }
 
-    /* Layout */
+    /* ==== Layout ==== */
     .page {
       max-width: var(--max-width);
       margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr;
-      padding: 0 18px;
+      padding: 30px 16px;
     }
 
+    /* ==== AdSense Blocks ==== */
+    .ad-block {
+      background: #fff;
+      border: 1px dashed rgba(0,0,0,0.1);
+      border-radius: 10px;
+      margin: 25px auto;
+      text-align: center;
+      min-height: 90px;
+      padding: 10px;
+    }
+
+    /* ==== Tools Grid ==== */
     .tools-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 20px;
-      justify-content: center;
+      margin-top: 30px;
     }
 
     .card {
       background: var(--card);
-      border-radius: 16px;
+      border-radius: 14px;
       padding: 24px;
       text-align: center;
-      box-shadow: 0 6px 18px rgba(15,23,42,0.06);
+      box-shadow: 0 6px 18px rgba(15,23,42,0.05);
       transition: transform .18s, box-shadow .18s;
     }
+
     .card:hover {
       transform: translateY(-6px);
       box-shadow: 0 10px 30px rgba(15,23,42,0.1);
     }
-    .card h3 { margin-bottom: 10px; color: #333; }
-    .card p { color: var(--muted); font-size: 0.95rem; margin-bottom: 16px; }
+
+    .card h3 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+
     .btn {
       background: var(--accent);
       color: #fff;
-      border: 0;
-      padding: 10px 14px;
+      border: none;
+      padding: 10px 16px;
       border-radius: 10px;
       cursor: pointer;
       font-weight: 600;
     }
 
-    /* Blog section */
-    .blog-section {
-      margin-top: 50px;
-    }
+    /* ==== Blog Section ==== */
     .blog-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
+      margin-top: 40px;
     }
+
     .blog-card {
       background: #fff;
       border-radius: 14px;
       padding: 20px;
-      text-align: left;
-      box-shadow: 0 6px 18px rgba(15,23,42,0.04);
+      box-shadow: 0 6px 18px rgba(15,23,42,0.05);
+      transition: transform .2s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
     }
-    .blog-card h3 { margin-top: 0; color: var(--accent); }
-    .blog-card p { color: var(--muted); }
 
+    .blog-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .blog-card img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 12px;
+    }
+
+    .blog-card h3 {
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .blog-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* ==== Footer ==== */
     footer {
       background: var(--footer);
       color: #fff;
-      padding: 30px 18px;
-      margin-top: 40px;
+      padding: 25px 18px;
     }
+
     .footer-inner {
       max-width: var(--max-width);
       margin: 0 auto;
@@ -158,30 +229,34 @@
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 20px;
+      gap: 16px;
     }
+
     .footer-links a {
       color: #d6cbff;
       text-decoration: none;
-      margin: 0 8px;
+      margin-right: 12px;
     }
 
-    @media(max-width:980px) {
-      .intro h2 { font-size: 1.6rem; }
+    .promo-footer img {
+      width: 200px;
+      border-radius: 8px;
+    }
+
+    @media(max-width: 768px) {
+      .hero { height: 180px; }
+      .hero h2 { font-size: 1.5rem; }
+      .promo-footer img { width: 100%; }
     }
   </style>
 </head>
 
 <body>
-  <!-- Header -->
+
   <header>
-    <div class="logo-section">
-      <img src="./images/docglyph-logo.png.png" alt="Docglyph Logo">
-      <div class="brand">
-        <h1>Docglyph</h1>
-        <p>Smart Tools for the Digital Era</p>
-      </div>
-    </div>
+    <!-- Logo section retained but commented to preserve layout -->
+    <!-- <div class="logo-section"><img src="./images/docglyph-logo.png.png" alt="Docglyph Logo"></div> -->
+    <div class="brand"><h1>Docglyph</h1></div>
 
     <nav>
       <div class="dropdown">
@@ -198,84 +273,124 @@
     </nav>
   </header>
 
-  <!-- ✅ SEO INTRO SECTION -->
-  <section class="intro">
-    <h2>Welcome to Docglyph</h2>
-    <p>
-      Docglyph is your digital workspace for privacy-first browser tools.
-      Whether you're merging PDFs, generating QR codes, or creating strong passwords and secure passphrases,
-      everything runs directly on your device — no uploads, no tracking.
-    </p>
-    <p>
-      Explore our AI and digital trust articles below to understand how technology, design, and identity intersect in the era of automation.
-    </p>
+  <section class="hero">
+    <div>
+      <h2>Smart Tools for the Digital Era</h2>
+      <p>All your essential browser tools — PDF, QR, Password, and AI utilities — private, fast, and secure.</p>
+    </div>
   </section>
 
   <main class="page">
-    <h2 class="section-title">Smart Tools</h2>
-    <hr class="divider" />
+    <div class="ad-block">
+      <!-- ✅ AdSense block top -->
+      <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-6206040467137091"
+        data-ad-slot="1111111111"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    </div>
 
+    <h2>Smart Tools</h2>
     <section class="tools-grid">
       <div class="card">
         <h3>PDF Tools</h3>
-        <p>Merge, split, or convert PDF files instantly — all within your browser.</p>
+        <p>Merge, split, or compress PDFs instantly in your browser.</p>
         <button class="btn" onclick="openModal('pdfModal')">Open</button>
       </div>
 
       <div class="card">
         <h3>QR Generator</h3>
-        <p>Create customized QR codes for links, text, or digital IDs.</p>
+        <p>Create QR codes for links or text — no upload needed.</p>
         <button class="btn" onclick="openModal('qrModal')">Open</button>
       </div>
 
       <div class="card">
         <h3>Password Creator</h3>
-        <p>Generate strong, encrypted, and unique passwords instantly.</p>
+        <p>Generate strong, random, and secure passwords instantly.</p>
         <button class="btn" onclick="openModal('pwdModal')">Open</button>
       </div>
 
       <div class="card">
         <h3>Passphrase / Key Creator</h3>
-        <p>Build human-friendly yet secure key phrases for better digital safety.</p>
+        <p>Create human-readable cryptographic keys with one click.</p>
         <button class="btn" onclick="openModal('phraseModal')">Open</button>
       </div>
     </section>
 
-    <section class="blog-section">
-      <h2 class="section-title">Digital Tools & AI Utility Insights</h2>
-      <hr class="divider" />
-      <div class="blog-grid">
-        <div class="blog-card">
-          <h3>Designing Trust</h3>
-          <p>How AI and UX design foster digital identity and transparency. Learn how trust frameworks evolve in automated systems.</p>
-        </div>
-        <div class="blog-card">
-          <h3>Smart Docs with AI</h3>
-          <p>AI is revolutionizing document workflows. Discover how automation simplifies contracts, audits, and verification.</p>
-        </div>
-        <div class="blog-card">
-          <h3>CBDCs & Digital Trust</h3>
-          <p>Explore how central bank digital currencies are shaping the next wave of fintech and identity assurance.</p>
-        </div>
-        <div class="blog-card">
-          <h3>Identity UX Patterns</h3>
-          <p>Learn how user experience design affects digital identity perception and authentication security.</p>
-        </div>
-      </div>
+    <div class="ad-block">
+      <!-- ✅ Mid-page AdSense block -->
+      <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-6206040467137091"
+        data-ad-slot="2222222222"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    </div>
+
+    <h2>Digital Tools & AI Utility Insights</h2>
+    <section class="blog-grid">
+      <a href="blog/designing-trust.html" class="blog-card">
+        <img src="./images/blog-trust.jpg" alt="Designing Trust">
+        <h3>Designing Trust</h3>
+        <p>UX patterns for digital identity and AI transparency.</p>
+      </a>
+
+      <a href="blog/smart-docs.html" class="blog-card">
+        <img src="./images/blog-smartdocs.jpg" alt="Smart Docs with AI">
+        <h3>Smart Docs with AI</h3>
+        <p>Automating document workflows with intelligent AI tools.</p>
+      </a>
+
+      <a href="blog/cbdc-digitaltrust.html" class="blog-card">
+        <img src="./images/blog-cbdc.jpg" alt="CBDC and Digital Trust">
+        <h3>CBDCs & Digital Trust</h3>
+        <p>Exploring design considerations for digital currencies.</p>
+      </a>
+
+      <a href="blog/identity-ux.html" class="blog-card">
+        <img src="./images/blog-identity.jpg" alt="Identity UX Patterns">
+        <h3>Identity UX Patterns</h3>
+        <p>How UX influences authentication and digital trust.</p>
+      </a>
     </section>
+
+    <div class="ad-block">
+      <!-- ✅ Footer AdSense block -->
+      <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-6206040467137091"
+        data-ad-slot="3333333333"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    </div>
   </main>
 
   <footer>
     <div class="footer-inner">
-      <div class="footer-links">
-        <a href="#">Blog</a>
-        <a href="#">About Us</a>
-        <a href="#">Contact Us</a>
+      <div>
+        <div class="footer-links">
+          <a href="#">Blog</a>
+          <a href="#">About Us</a>
+          <a href="#">Contact Us</a>
+        </div>
+        <p>© 2025 Docglyph. All rights reserved.</p>
       </div>
-      <div>© 2025 Docglyph</div>
+      <div class="promo-footer">
+        <a href="https://freename.com/home/aieth-banner.png.png" target="_blank">
+          <img src="./images/aieth-banner.png.png" alt="AIETH Promo Banner">
+        </a>
+      </div>
     </div>
   </footer>
 
   <script src="script.js"></script>
+  <script>
+    window.addEventListener("load", function() {
+      document.querySelectorAll(".adsbygoogle").forEach(() => {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      });
+    });
+  </script>
 </body>
 </html>
